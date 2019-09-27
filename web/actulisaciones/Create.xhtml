@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateActulisacionesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_idactulisaciones}" for="idactulisaciones" />
+                    <h:inputText id="idactulisaciones" value="#{actulisacionesController.selected.idactulisaciones}" title="#{bundle.CreateActulisacionesTitle_idactulisaciones}" required="true" requiredMessage="#{bundle.CreateActulisacionesRequiredMessage_idactulisaciones}"/>
+                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{actulisacionesController.selected.descripcion}" title="#{bundle.CreateActulisacionesTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_presupuesto}" for="presupuesto" />
+                    <h:inputText id="presupuesto" value="#{actulisacionesController.selected.presupuesto}" title="#{bundle.CreateActulisacionesTitle_presupuesto}" required="true" requiredMessage="#{bundle.CreateActulisacionesRequiredMessage_presupuesto}"/>
+                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_idTrabajos}" for="idTrabajos" />
+                    <h:selectOneMenu id="idTrabajos" value="#{actulisacionesController.selected.idTrabajos}" title="#{bundle.CreateActulisacionesTitle_idTrabajos}" required="true" requiredMessage="#{bundle.CreateActulisacionesRequiredMessage_idTrabajos}">
+                        <f:selectItems value="#{trabajosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_idreparaciones}" for="idreparaciones" />
+                    <h:selectOneMenu id="idreparaciones" value="#{actulisacionesController.selected.idreparaciones}" title="#{bundle.CreateActulisacionesTitle_idreparaciones}" required="true" requiredMessage="#{bundle.CreateActulisacionesRequiredMessage_idreparaciones}">
+                        <f:selectItems value="#{reparacionesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{actulisacionesController.create}" value="#{bundle.CreateActulisacionesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{actulisacionesController.prepareList}" value="#{bundle.CreateActulisacionesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateActulisacionesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

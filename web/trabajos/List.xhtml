@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTrabajosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTrabajosEmpty}" rendered="#{trabajosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{trabajosController.items.rowCount > 0}">
+                    <h:outputText value="#{trabajosController.pagination.pageFirstItem + 1}..#{trabajosController.pagination.pageLastItem + 1}/#{trabajosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{trabajosController.previous}" value="#{bundle.Previous} #{trabajosController.pagination.pageSize}" rendered="#{trabajosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{trabajosController.next}" value="#{bundle.Next} #{trabajosController.pagination.pageSize}" rendered="#{trabajosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{trabajosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_idTrabajos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTrabajos}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_fechaRecepcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaRecepcion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_fechaEstimada}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaEstimada}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_estatus}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estatus}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_fechaEntrega}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaEntrega}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_total}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.total}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_idClientes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idClientes}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_idusuarios}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idusuarios}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_idProducto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProducto}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{trabajosController.prepareView}" value="#{bundle.ListTrabajosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{trabajosController.prepareEdit}" value="#{bundle.ListTrabajosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{trabajosController.destroy}" value="#{bundle.ListTrabajosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{trabajosController.prepareCreate}" value="#{bundle.ListTrabajosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTrabajosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

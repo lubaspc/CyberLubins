@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewActulisacionesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewActulisacionesLabel_idactulisaciones}"/>
+                    <h:outputText value="#{actulisacionesController.selected.idactulisaciones}" title="#{bundle.ViewActulisacionesTitle_idactulisaciones}"/>
+                    <h:outputText value="#{bundle.ViewActulisacionesLabel_descripcion}"/>
+                    <h:outputText value="#{actulisacionesController.selected.descripcion}" title="#{bundle.ViewActulisacionesTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewActulisacionesLabel_presupuesto}"/>
+                    <h:outputText value="#{actulisacionesController.selected.presupuesto}" title="#{bundle.ViewActulisacionesTitle_presupuesto}"/>
+                    <h:outputText value="#{bundle.ViewActulisacionesLabel_idTrabajos}"/>
+                    <h:outputText value="#{actulisacionesController.selected.idTrabajos}" title="#{bundle.ViewActulisacionesTitle_idTrabajos}"/>
+                    <h:outputText value="#{bundle.ViewActulisacionesLabel_idreparaciones}"/>
+                    <h:outputText value="#{actulisacionesController.selected.idreparaciones}" title="#{bundle.ViewActulisacionesTitle_idreparaciones}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{actulisacionesController.destroyAndView}" value="#{bundle.ViewActulisacionesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewActulisacionesEditLink}"/>
+                <br />
+                <h:commandLink action="#{actulisacionesController.prepareCreate}" value="#{bundle.ViewActulisacionesCreateLink}" />
+                <br />
+                <h:commandLink action="#{actulisacionesController.prepareList}" value="#{bundle.ViewActulisacionesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewActulisacionesIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

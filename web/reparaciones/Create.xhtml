@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateReparacionesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateReparacionesLabel_idReparaciones}" for="idReparaciones" />
+                    <h:inputText id="idReparaciones" value="#{reparacionesController.selected.idReparaciones}" title="#{bundle.CreateReparacionesTitle_idReparaciones}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_idReparaciones}"/>
+                    <h:outputLabel value="#{bundle.CreateReparacionesLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{reparacionesController.selected.descripcion}" title="#{bundle.CreateReparacionesTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_descripcion}"/>
+                    <h:outputLabel value="#{bundle.CreateReparacionesLabel_costo}" for="costo" />
+                    <h:inputText id="costo" value="#{reparacionesController.selected.costo}" title="#{bundle.CreateReparacionesTitle_costo}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_costo}"/>
+                    <h:outputLabel value="#{bundle.CreateReparacionesLabel_duracion}" for="duracion" />
+                    <h:inputText id="duracion" value="#{reparacionesController.selected.duracion}" title="#{bundle.CreateReparacionesTitle_duracion}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_duracion}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{reparacionesController.create}" value="#{bundle.CreateReparacionesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{reparacionesController.prepareList}" value="#{bundle.CreateReparacionesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateReparacionesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

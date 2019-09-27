@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTrabajosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_idTrabajos}"/>
+                    <h:outputText value="#{trabajosController.selected.idTrabajos}" title="#{bundle.ViewTrabajosTitle_idTrabajos}"/>
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_fechaRecepcion}"/>
+                    <h:outputText value="#{trabajosController.selected.fechaRecepcion}" title="#{bundle.ViewTrabajosTitle_fechaRecepcion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_fechaEstimada}"/>
+                    <h:outputText value="#{trabajosController.selected.fechaEstimada}" title="#{bundle.ViewTrabajosTitle_fechaEstimada}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_estatus}"/>
+                    <h:outputText value="#{trabajosController.selected.estatus}" title="#{bundle.ViewTrabajosTitle_estatus}"/>
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_fechaEntrega}"/>
+                    <h:outputText value="#{trabajosController.selected.fechaEntrega}" title="#{bundle.ViewTrabajosTitle_fechaEntrega}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_total}"/>
+                    <h:outputText value="#{trabajosController.selected.total}" title="#{bundle.ViewTrabajosTitle_total}"/>
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_idClientes}"/>
+                    <h:outputText value="#{trabajosController.selected.idClientes}" title="#{bundle.ViewTrabajosTitle_idClientes}"/>
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_idusuarios}"/>
+                    <h:outputText value="#{trabajosController.selected.idusuarios}" title="#{bundle.ViewTrabajosTitle_idusuarios}"/>
+                    <h:outputText value="#{bundle.ViewTrabajosLabel_idProducto}"/>
+                    <h:outputText value="#{trabajosController.selected.idProducto}" title="#{bundle.ViewTrabajosTitle_idProducto}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{trabajosController.destroyAndView}" value="#{bundle.ViewTrabajosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTrabajosEditLink}"/>
+                <br />
+                <h:commandLink action="#{trabajosController.prepareCreate}" value="#{bundle.ViewTrabajosCreateLink}" />
+                <br />
+                <h:commandLink action="#{trabajosController.prepareList}" value="#{bundle.ViewTrabajosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTrabajosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
