@@ -7,61 +7,95 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListReparacionesTitle}"></h:outputText>
+            <h:outputText value="Reparaciones"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListReparacionesEmpty}" rendered="#{reparacionesController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{reparacionesController.items.rowCount > 0}">
-                    <h:outputText value="#{reparacionesController.pagination.pageFirstItem + 1}..#{reparacionesController.pagination.pageLastItem + 1}/#{reparacionesController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{reparacionesController.previous}" value="#{bundle.Previous} #{reparacionesController.pagination.pageSize}" rendered="#{reparacionesController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{reparacionesController.next}" value="#{bundle.Next} #{reparacionesController.pagination.pageSize}" rendered="#{reparacionesController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{reparacionesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReparacionesTitle_idReparaciones}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idReparaciones}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReparacionesTitle_descripcion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReparacionesTitle_costo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.costo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReparacionesTitle_duracion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.duracion}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{reparacionesController.prepareView}" value="#{bundle.ListReparacionesViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{reparacionesController.prepareEdit}" value="#{bundle.ListReparacionesEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{reparacionesController.destroy}" value="#{bundle.ListReparacionesDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{reparacionesController.prepareCreate}" value="#{bundle.ListReparacionesCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListReparacionesIndexLink}"/>
-            </h:form>
+            <div class="row">
+                <h:form styleClass="jsfcrud_list_form col-12 col-md-6">
+                    <h:commandLink class="btn btn-outline-dark" action="#{reparacionesController.prepareList}" value="#{bundle.CreateReparacionesShowAllLink}" immediate="true"/>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListReparacionesEmpty}" rendered="#{reparacionesController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{reparacionesController.items.rowCount > 0}">
+                        <h:outputText value="#{reparacionesController.pagination.pageFirstItem + 1}..#{reparacionesController.pagination.pageLastItem + 1}/#{reparacionesController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{reparacionesController.previous}" value="#{bundle.Previous} #{reparacionesController.pagination.pageSize}" rendered="#{reparacionesController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{reparacionesController.next}" value="#{bundle.Next} #{reparacionesController.pagination.pageSize}" rendered="#{reparacionesController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable value="#{reparacionesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListReparacionesTitle_descripcion}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descripcion}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListReparacionesTitle_costo}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.costo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListReparacionesTitle_duracion}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.duracion}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Acciones"/>
+                                </f:facet>
+                                <h:commandLink class="btn btn-outline-secondary" action="#{reparacionesController.prepareEdit}" value="#{bundle.ListReparacionesEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink class="btn btn-outline-danger" action="#{reparacionesController.destroy}" value="#{bundle.ListReparacionesDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </h:form>
+                <div class="col-12 col-md-3">
+                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Editar Reparacion</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid class="form-group">
+                                    <h:outputLabel value="#{bundle.EditReparacionesLabel_descripcion}" for="descripcion" class="m-0"/>
+                                    <h:inputText class="form-control" id="descripcion" value="#{reparacionesController.selected.descripcion}" title="#{bundle.EditReparacionesTitle_descripcion}" required="true" requiredMessage="#{bundle.EditReparacionesRequiredMessage_descripcion}"/>
+                                    <h:outputLabel value="#{bundle.EditReparacionesLabel_costo}" for="costo" class="m-0"/>
+                                    <h:inputText class="form-control" id="costo" value="#{reparacionesController.selected.costo}" title="#{bundle.EditReparacionesTitle_costo}" required="true" requiredMessage="#{bundle.EditReparacionesRequiredMessage_costo}"/>
+                                    <h:outputLabel value="#{bundle.EditReparacionesLabel_duracion}" for="duracion" class="m-0"/>
+                                    <h:inputText class="form-control" id="duracion" value="#{reparacionesController.selected.duracion}" title="#{bundle.EditReparacionesTitle_duracion}" required="true" requiredMessage="#{bundle.EditReparacionesRequiredMessage_duracion}"/>
+                                </h:panelGrid>
+                                <h:commandLink class="btn btn-info form-control" action="#{reparacionesController.update}" value="#{bundle.EditReparacionesSaveLink}"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-3">
+                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Crear Reparacion</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid class="form-group">
+                                    <h:outputLabel value="#{bundle.CreateReparacionesLabel_idReparaciones}" for="idReparaciones" />
+                                    <h:inputText class="form-control" id="idReparaciones" value="#{reparacionesController.selected.idReparaciones}" title="#{bundle.CreateReparacionesTitle_idReparaciones}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_idReparaciones}"/>
+                                    <h:outputLabel value="#{bundle.CreateReparacionesLabel_descripcion}" for="descripcion" class="m-0"  />
+                                    <h:inputText class="form-control" id="descripcion" value="#{reparacionesController.selected.descripcion}" title="#{bundle.CreateReparacionesTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_descripcion}"/>
+                                    <h:outputLabel  value="#{bundle.CreateReparacionesLabel_costo}" for="costo" class="m-0"  />
+                                    <h:inputText class="form-control" id="costo" value="#{reparacionesController.selected.costo}" title="#{bundle.CreateReparacionesTitle_costo}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_costo}"/>
+                                    <h:outputLabel value="#{bundle.CreateReparacionesLabel_duracion}" for="duracion" class="m-0" />
+                                    <h:inputText class="form-control" id="duracion" value="#{reparacionesController.selected.duracion}" title="#{bundle.CreateReparacionesTitle_duracion}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_duracion}"/>
+                                </h:panelGrid>
+
+                                <h:commandLink class="btn btn-success form-control" action="#{reparacionesController.create}" value="Guardar" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 

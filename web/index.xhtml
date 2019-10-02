@@ -23,33 +23,37 @@
     </h:head>
     <h:body>
          <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-                      <a class="navbar-brand" href="#">Cyber Lubins</a>
-                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                      </button>
+            <h:link class="navbar-brand" outcome="/index" value="Cyber Lubin's" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <h:link outcome="/actulisaciones/List" class="nav-link" value="Actulisaciones"/>
-                            </li><li class="nav-item">
-                                <h:link outcome="/clientes/List"  class="nav-link" value="Clientes"/>
-                            </li><li class="nav-item">
-                                <h:link outcome="/marca/List" class="nav-link" value="Marca"/>
-                            </li><li class="nav-item">
-                                <h:link outcome="/producto/List" class="nav-link" value="Producto"/>
-                            </li><li class="nav-item">
-                                <h:link outcome="/reparaciones/List" class="nav-link" value="Reparaciones"/>
-                            </li><li class="nav-item">
-                                <h:link outcome="/tipoEquipo/List" class="nav-link" value="TipoEquipo"/>
-                            </li><li class="nav-item">
-                                <h:link outcome="/trabajos/List" class="nav-link" value="Trabajos"/>
-                            </li><li class="nav-item">
-                                <h:link outcome="/usuarios/List" class="nav-link" value="Usuarios"/>
-                            </li>
-                        </ul>
-                      </div>
-                    </nav>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <h:link outcome="/actulisaciones/List" class="nav-link" value="Actulisaciones"/>
+                  </li><li class="nav-item">
+                       <h:link outcome="/trabajos/List" class="nav-link" value="Trabajos"/>
+                  </li><li class="nav-item">
+                     <h:link outcome="/clientes/List"  class="nav-link" value="Clientes"/>
+                  </li><li class="nav-item">
+                      <h:link outcome="/usuarios/List" class="nav-link" value="Usuarios"/>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Mas opciones 
+                    </a>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                      <h:link outcome="/producto/List" class="nav-link" value="Producto"/>
+                     <h:link outcome="/tipoEquipo/List" class="nav-link" value="TipoEquipo"/>
+                      <h:link outcome="/marca/List" class="nav-link" value="Marca"/>
+                      <div class="dropdown-divider"></div>
+                      <h:link outcome="/reparaciones/List" class="nav-link" value="Reparaciones"/>
+                    </div>
+                  </li>
+              </ul>
+            </div>
+          </nav>
     </h:body>
 
 

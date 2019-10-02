@@ -6,50 +6,79 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
+        
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListTipoEquipoTitle}"></h:outputText>
+            <h:outputText value="Tipos de equipos" ></h:outputText>
         </ui:define>
+        
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListTipoEquipoEmpty}" rendered="#{tipoEquipoController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{tipoEquipoController.items.rowCount > 0}">
-                    <h:outputText value="#{tipoEquipoController.pagination.pageFirstItem + 1}..#{tipoEquipoController.pagination.pageLastItem + 1}/#{tipoEquipoController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{tipoEquipoController.previous}" value="#{bundle.Previous} #{tipoEquipoController.pagination.pageSize}" rendered="#{tipoEquipoController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{tipoEquipoController.next}" value="#{bundle.Next} #{tipoEquipoController.pagination.pageSize}" rendered="#{tipoEquipoController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{tipoEquipoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTipoEquipoTitle_idtipoEquipo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idtipoEquipo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTipoEquipoTitle_tipo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tipo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{tipoEquipoController.prepareView}" value="#{bundle.ListTipoEquipoViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{tipoEquipoController.prepareEdit}" value="#{bundle.ListTipoEquipoEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{tipoEquipoController.destroy}" value="#{bundle.ListTipoEquipoDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{tipoEquipoController.prepareCreate}" value="#{bundle.ListTipoEquipoCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListTipoEquipoIndexLink}"/>
-            </h:form>
+            <div class="row">
+                <h:form styleClass="jsfcrud_list_form col-12 col-md-5">
+                    <h:commandLink class="btn btn-outline-dark" action="#{tipoEquipoController.prepareList}" value="#{bundle.CreateTipoEquipoShowAllLink}" immediate="true"/>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    
+                    <h:outputText escape="false" value="#{bundle.ListTipoEquipoEmpty}" rendered="#{tipoEquipoController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{tipoEquipoController.items.rowCount > 0}">
+                        <h:outputText value="#{tipoEquipoController.pagination.pageFirstItem + 1}..#{tipoEquipoController.pagination.pageLastItem + 1}/#{tipoEquipoController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{tipoEquipoController.previous}" value="Anterior" rendered="#{tipoEquipoController.pagination.hasPreviousPage}"/>Ant
+                        <h:commandLink action="#{tipoEquipoController.next}" value="Siguiente" rendered="#{tipoEquipoController.pagination.hasNextPage}"/>Next
+                        <h:dataTable value="#{tipoEquipoController.items}" var="item" border="3" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListTipoEquipoTitle_tipo}"/>
+                                </f:facet>
+                                <h:outputText class="h3" value="#{item.tipo}"/>
+                            </h:column>
+                        
+                            <h:column class="align-items-center">
+                                <f:facet name="header">
+                                    <h:outputText value="Opciones"/>
+                                </f:facet>
+                                <h:commandLink class="btn btn-outline-secondary" action="#{tipoEquipoController.prepareEdit}" value="#{bundle.ListTipoEquipoEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink class="btn btn-outline-danger" action="#{tipoEquipoController.destroy}" value="#{bundle.ListTipoEquipoDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </h:form>
+                <div class="col-12 col-md-3">
+                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Editar tipo</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid class="form-group" >
+                                    <h:outputLabel value="#{bundle.EditTipoEquipoLabel_tipo}" for="tipo" class="mb-0" />
+                                    <h:inputText id="tipo" value="#{tipoEquipoController.selected.tipo}" class="form-control" title="#{bundle.EditTipoEquipoTitle_tipo}" />
+                                </h:panelGrid>
+                                <h:commandLink class="btn btn-info form-control" action="#{tipoEquipoController.update}" value="Modificar"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-3">
+                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Crear tipo</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid class="form-group" >
+                                    <h:outputLabel value="#{bundle.CreateTipoEquipoLabel_tipo}" for="tipo" class="mb-0" />
+                                    <h:inputText id="tipo" class="form-control" value="#{tipoEquipoController.selected.tipo}" title="#{bundle.CreateTipoEquipoTitle_tipo}"/>
+                                </h:panelGrid>
+                                <h:commandLink class="btn btn-success form-control" action="#{tipoEquipoController.create}" value="Guardar" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
         </ui:define>
     </ui:composition>
 

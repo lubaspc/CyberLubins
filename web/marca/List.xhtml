@@ -7,49 +7,75 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListMarcaTitle}"></h:outputText>
+            <h:outputText value="Marcas"></h:outputText>
         </ui:define>
+        
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListMarcaEmpty}" rendered="#{marcaController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{marcaController.items.rowCount > 0}">
-                    <h:outputText value="#{marcaController.pagination.pageFirstItem + 1}..#{marcaController.pagination.pageLastItem + 1}/#{marcaController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{marcaController.previous}" value="#{bundle.Previous} #{marcaController.pagination.pageSize}" rendered="#{marcaController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{marcaController.next}" value="#{bundle.Next} #{marcaController.pagination.pageSize}" rendered="#{marcaController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{marcaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMarcaTitle_idmarca}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idmarca}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMarcaTitle_nombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{marcaController.prepareView}" value="#{bundle.ListMarcaViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{marcaController.prepareEdit}" value="#{bundle.ListMarcaEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{marcaController.destroy}" value="#{bundle.ListMarcaDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{marcaController.prepareCreate}" value="#{bundle.ListMarcaCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListMarcaIndexLink}"/>
-            </h:form>
+            <div class="row">
+                <h:form styleClass="jsfcrud_list_form col-12 col-md-5">
+                    <h:commandLink class="btn btn-outline-dark" action="#{marcaController.prepareList}" value="#{bundle.CreateMarcaShowAllLink}" immediate="true"/>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListMarcaEmpty}" rendered="#{marcaController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{marcaController.items.rowCount > 0}">
+                        <h:outputText value="#{marcaController.pagination.pageFirstItem + 1}..#{marcaController.pagination.pageLastItem + 1}/#{marcaController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{marcaController.previous}" value="#{bundle.Previous} #{marcaController.pagination.pageSize}" rendered="#{marcaController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{marcaController.next}" value="#{bundle.Next} #{marcaController.pagination.pageSize}" rendered="#{marcaController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable value="#{marcaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Marca"/>
+                                </f:facet>
+                                <h:outputText class="h3" value="#{item.nombre}"/>
+                            </h:column>
+                            
+                             <h:column class="align-items-center">
+                                <f:facet name="header">
+                                    <h:outputText value="Opciones"/>
+                                </f:facet>
+                                <h:commandLink class="btn btn-outline-secondary" action="#{marcaController.prepareEdit}" value="#{bundle.ListMarcaEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink class="btn btn-outline-danger" action="#{marcaController.destroy}" value="#{bundle.ListMarcaDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </h:form>
+                 <div class="col-12 col-md-3">
+                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Editar Marca</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid class="form-group" >
+                                    <h:outputLabel value="#{bundle.EditMarcaLabel_nombre}" for="nombre"  class="mb-0"/>
+                                    <h:inputText id="nombre" class="form-control" value="#{marcaController.selected.nombre}" title="#{bundle.EditMarcaTitle_nombre}" />
+                                </h:panelGrid>
+                                <h:commandLink class="btn btn-info form-control" action="#{marcaController.update}" value="Modificar"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-3">
+                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Crear Marca</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid class="form-group" >
+                                    <h:outputLabel value="#{bundle.CreateMarcaLabel_nombre}" for="nombre" class="mb-0" />
+                                    <h:inputText id="nombre" class="form-control" value="#{marcaController.selected.nombre}" title="#{bundle.CreateMarcaTitle_nombre}" />
+                                </h:panelGrid>
+                                <h:commandLink class="btn btn-success form-control" action="#{marcaController.create}" value="Guardar" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 

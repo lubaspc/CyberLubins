@@ -7,67 +7,108 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListUsuariosTitle}"></h:outputText>
+            <h:outputText value="Usuarios"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListUsuariosEmpty}" rendered="#{usuariosController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{usuariosController.items.rowCount > 0}">
-                    <h:outputText value="#{usuariosController.pagination.pageFirstItem + 1}..#{usuariosController.pagination.pageLastItem + 1}/#{usuariosController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{usuariosController.previous}" value="#{bundle.Previous} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{usuariosController.next}" value="#{bundle.Next} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{usuariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_idusuarios}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idusuarios}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_tipoUsr}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tipoUsr}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_nombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_correo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.correo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuariosTitle_password}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.password}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{usuariosController.prepareView}" value="#{bundle.ListUsuariosViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usuariosController.prepareEdit}" value="#{bundle.ListUsuariosEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{usuariosController.destroy}" value="#{bundle.ListUsuariosDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{usuariosController.prepareCreate}" value="#{bundle.ListUsuariosCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListUsuariosIndexLink}"/>
-            </h:form>
+            <div class="row">
+                <h:form styleClass="jsfcrud_list_form col-12 col-md-6">
+                    <h:commandLink class="btn btn-outline-dark" action="#{usuariosController.prepareList}" value="#{bundle.CreateUsuariosShowAllLink}" immediate="true"/>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListUsuariosEmpty}" rendered="#{usuariosController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{usuariosController.items.rowCount > 0}">
+                        <h:outputText value="#{usuariosController.pagination.pageFirstItem + 1}..#{usuariosController.pagination.pageLastItem + 1}/#{usuariosController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{usuariosController.previous}" value="#{bundle.Previous} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{usuariosController.next}" value="#{bundle.Next} #{usuariosController.pagination.pageSize}" rendered="#{usuariosController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable value="#{usuariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                           
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUsuariosTitle_tipoUsr}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoUsr}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUsuariosTitle_nombre}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUsuariosTitle_correo}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.correo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListUsuariosTitle_password}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.password}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Acciones"/>
+                                </f:facet>
+                               
+                                <h:commandLink class="btn btn-outline-secondary" action="#{usuariosController.prepareEdit}" value="#{bundle.ListUsuariosEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink class="btn btn-outline-danger" action="#{usuariosController.destroy}" value="#{bundle.ListUsuariosDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </h:form>
+                <div class="col-12 col-md-3">
+                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Editar Clientes</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid class="form-group">
+                                    <h:outputLabel value="#{bundle.EditUsuariosLabel_idusuarios}" for="idusuarios" />
+                                    <h:inputText class="form-control" id="idusuarios" value="#{usuariosController.selected.idusuarios}" title="#{bundle.EditUsuariosTitle_idusuarios}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_idusuarios}"/>
+                                    <h:outputLabel value="#{bundle.EditUsuariosLabel_tipoUsr}" for="tipoUsr" />
+                                    <h:inputText class="form-control" id="nombre" value="#{usuariosController.selected.nombre}" title="#{bundle.EditUsuariosTitle_nombre}" />
+                                    <h:outputLabel value="#{bundle.EditUsuariosLabel_nombre}" for="nombre" />
+                                    <h:inputText class="form-control" id="tipoUsr" value="#{usuariosController.selected.tipoUsr}" title="#{bundle.EditUsuariosTitle_tipoUsr}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_tipoUsr}"/>
+                                    <h:outputLabel value="#{bundle.EditUsuariosLabel_correo}" for="correo" />
+                                    <h:inputText class="form-control" id="correo" value="#{usuariosController.selected.correo}" title="#{bundle.EditUsuariosTitle_correo}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_correo}"/>
+                                    <h:outputLabel value="#{bundle.EditUsuariosLabel_password}" for="password" />
+                                    <h:inputText class="form-control" id="password" value="#{usuariosController.selected.password}" title="#{bundle.EditUsuariosTitle_password}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_password}"/>
+                                </h:panelGrid>
+                                <h:commandLink class="btn btn-info form-control" action="#{usuariosController.update}" value="Modificar"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-3">
+                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Crear Reparacion</h4>
+                        </div>
+                        <div class="card-body">
+                           <h:form>
+                                <h:panelGrid class="form-group">
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_idusuarios}" for="idusuarios" />
+                                    <h:inputText class="form-control" id="idusuarios" value="#{usuariosController.selected.idusuarios}" title="#{bundle.CreateUsuariosTitle_idusuarios}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_idusuarios}"/>
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_tipoUsr}" for="tipoUsr" />
+                                    <h:inputText class="form-control" id="nombre" value="#{usuariosController.selected.nombre}" title="#{bundle.CreateUsuariosTitle_nombre}" />
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_nombre}" for="nombre" />
+                                    <h:inputText class="form-control" id="tipoUsr" value="#{usuariosController.selected.tipoUsr}" title="#{bundle.CreateUsuariosTitle_tipoUsr}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_tipoUsr}"/>
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_correo}" for="correo" />
+                                    <h:inputText class="form-control" id="correo" value="#{usuariosController.selected.correo}" title="#{bundle.CreateUsuariosTitle_correo}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_correo}"/>
+                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_password}" for="password" />
+                                    <h:inputText class="form-control" id="password" value="#{usuariosController.selected.password}" title="#{bundle.CreateUsuariosTitle_password}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_password}"/>
+                                </h:panelGrid>
+                                <h:commandLink class="btn btn-success form-control" action="#{usuariosController.create}" value="Guardar" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 

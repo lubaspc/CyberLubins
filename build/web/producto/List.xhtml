@@ -7,61 +7,105 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListProductoTitle}"></h:outputText>
+            <h:outputText value="Productos"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListProductoEmpty}" rendered="#{productoController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{productoController.items.rowCount > 0}">
-                    <h:outputText value="#{productoController.pagination.pageFirstItem + 1}..#{productoController.pagination.pageLastItem + 1}/#{productoController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{productoController.previous}" value="#{bundle.Previous} #{productoController.pagination.pageSize}" rendered="#{productoController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{productoController.next}" value="#{bundle.Next} #{productoController.pagination.pageSize}" rendered="#{productoController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{productoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductoTitle_idProducto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProducto}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductoTitle_descripcion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductoTitle_idtipoEquipo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idtipoEquipo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProductoTitle_idmarca}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idmarca}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{productoController.prepareView}" value="#{bundle.ListProductoViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{productoController.prepareEdit}" value="#{bundle.ListProductoEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{productoController.destroy}" value="#{bundle.ListProductoDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{productoController.prepareCreate}" value="#{bundle.ListProductoCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListProductoIndexLink}"/>
-            </h:form>
+            
+            <div class="row">
+                <h:form styleClass="jsfcrud_list_form col-12 col-md-6">
+                    <h:commandLink class="btn btn-outline-dark" action="#{productoController.prepareList}" value="#{bundle.CreateProductoShowAllLink}" immediate="true"/>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListProductoEmpty}" rendered="#{productoController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{productoController.items.rowCount > 0}">
+                        <h:outputText value="#{productoController.pagination.pageFirstItem + 1}..#{productoController.pagination.pageLastItem + 1}/#{productoController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{productoController.previous}" value="#{bundle.Previous} #{productoController.pagination.pageSize}" rendered="#{productoController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{productoController.next}" value="#{bundle.Next} #{productoController.pagination.pageSize}" rendered="#{productoController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable value="#{productoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripcion"/>
+                                </f:facet>
+                                <h:outputText class="h5" value="#{item.descripcion}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Equipo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idtipoEquipo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Marca"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idmarca}"/>
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">
+                                    <h:outputText value="Acciones"/>
+                                </f:facet>
+                                <h:commandLink class="btn btn-outline-secondary" action="#{productoController.prepareEdit}" value="#{bundle.ListProductoEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink class="btn btn-outline-danger" action="#{productoController.destroy}" value="#{bundle.ListProductoDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </h:form>
+                <div class="col-12 col-md-3">
+                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Editar producto</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid  class="form-group">
+                                    
+                                    <h:outputLabel value="#{bundle.EditProductoLabel_descripcion}" for="descripcion" class="m-0" />
+                                    <h:inputText class="form-control" id="descripcion" value="#{productoController.selected.descripcion}" title="#{bundle.EditProductoTitle_descripcion}" />
+                                    <h:outputLabel value="#{bundle.EditProductoLabel_idtipoEquipo}" for="idtipoEquipo" class="m-0"/>
+                                    <h:selectOneMenu class="form-control" id="idtipoEquipo" value="#{productoController.selected.idtipoEquipo}" title="#{bundle.EditProductoTitle_idtipoEquipo}" required="true" requiredMessage="#{bundle.EditProductoRequiredMessage_idtipoEquipo}">
+                                        <f:selectItems value="#{tipoEquipoController.itemsAvailableSelectOne}"/>
+                                    </h:selectOneMenu>
+                                    <h:outputLabel value="#{bundle.EditProductoLabel_idmarca}" for="idmarca" class="m-0" />
+                                    <h:selectOneMenu class="form-control" id="idmarca" value="#{productoController.selected.idmarca}" title="#{bundle.EditProductoTitle_idmarca}" required="true" requiredMessage="#{bundle.EditProductoRequiredMessage_idmarca}">
+                                        <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"/>
+                                    </h:selectOneMenu>
+                                </h:panelGrid>
+                                <h:commandLink class="btn btn-info form-control" action="#{productoController.update}" value="Modificar"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-3">
+                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                        <div class="card-header">
+                            <h4 class="text-center">Crear producto</h4>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <h:panelGrid class="form-group">
+                                    <h:outputLabel value="#{bundle.CreateProductoLabel_idProducto}" for="idProducto" class="m-0"/>
+                                    <h:inputText class="form-control" id="idProducto" value="#{productoController.selected.idProducto}" title="#{bundle.CreateProductoTitle_idProducto}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idProducto}"/>
+                                    <h:outputLabel value="#{bundle.CreateProductoLabel_descripcion}" for="descripcion" class="my-0" />
+                                    <h:inputText class="form-control" id="descripcion" value="#{productoController.selected.descripcion}" title="#{bundle.CreateProductoTitle_descripcion}" />
+                                    <h:outputLabel value="#{bundle.CreateProductoLabel_idtipoEquipo}" for="idtipoEquipo" class="my-0"/>
+                                    <h:selectOneMenu class="form-control" id="idtipoEquipo" value="#{productoController.selected.idtipoEquipo}" title="#{bundle.CreateProductoTitle_idtipoEquipo}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idtipoEquipo}">
+                                        <f:selectItems value="#{tipoEquipoController.itemsAvailableSelectOne}"/>
+                                    </h:selectOneMenu>
+                                    <h:outputLabel value="#{bundle.CreateProductoLabel_idmarca}" for="idmarca" class="my-0" />
+                                    <h:selectOneMenu class="form-control" id="idmarca" value="#{productoController.selected.idmarca}" title="#{bundle.CreateProductoTitle_idmarca}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idmarca}">
+                                        <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"/>
+                                    </h:selectOneMenu>
+                                </h:panelGrid>
+                                <br />
+                                <h:commandLink class="btn btn-success form-control" action="#{productoController.create}" value="Guardar" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 
