@@ -11,8 +11,8 @@
         </ui:define>
         <ui:define name="body">
             <div class="row">
-                <h:form styleClass="jsfcrud_list_form col-12 col-md-6">
-                    <h:commandLink class="btn btn-outline-dark" action="#{reparacionesController.prepareList}" value="#{bundle.CreateReparacionesShowAllLink}" immediate="true"/>
+                <h:form styleClass="col-12 col-lg-6">
+                    <h:commandLink class="btn btn-outline-dark" action="#{reparacionesController.prepareList}" value="Actualizar Tabla" immediate="true"/>
                     <h:panelGroup id="messagePanel" layout="block">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
@@ -21,7 +21,7 @@
                         <h:outputText value="#{reparacionesController.pagination.pageFirstItem + 1}..#{reparacionesController.pagination.pageLastItem + 1}/#{reparacionesController.pagination.itemsCount}"/>&nbsp;
                         <h:commandLink action="#{reparacionesController.previous}" value="#{bundle.Previous} #{reparacionesController.pagination.pageSize}" rendered="#{reparacionesController.pagination.hasPreviousPage}"/>&nbsp;
                         <h:commandLink action="#{reparacionesController.next}" value="#{bundle.Next} #{reparacionesController.pagination.pageSize}" rendered="#{reparacionesController.pagination.hasNextPage}"/>&nbsp;
-                        <h:dataTable value="#{reparacionesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:dataTable styleClass="table table-dark table-sm" value="#{reparacionesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListReparacionesTitle_descripcion}"/>
@@ -51,8 +51,8 @@
                         </h:dataTable>
                     </h:panelGroup>
                 </h:form>
-                <div class="col-12 col-md-3">
-                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                <div class="col-12 col-lg-3">
+                     <div class="card shadow p-3 mb-5 text-white bg-dark border-success" style="height: max-content" >
                         <div class="card-header">
                             <h4 class="text-center">Editar Reparacion</h4>
                         </div>
@@ -72,16 +72,15 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-md-3">
-                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                <div class="col-12 col-lg-3">
+                   <div class="card shadow p-3 mb-5 text-white bg-secondary border-success" style="height: max-content" >
                         <div class="card-header">
                             <h4 class="text-center">Crear Reparacion</h4>
                         </div>
                         <div class="card-body">
                             <h:form>
                                 <h:panelGrid class="form-group">
-                                    <h:outputLabel value="#{bundle.CreateReparacionesLabel_idReparaciones}" for="idReparaciones" />
-                                    <h:inputText class="form-control" id="idReparaciones" value="#{reparacionesController.selected.idReparaciones}" title="#{bundle.CreateReparacionesTitle_idReparaciones}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_idReparaciones}"/>
+                                    <h:inputHidden class="form-control" id="idReparaciones" value="#{reparacionesController.selected.idReparaciones}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_idReparaciones}"/>
                                     <h:outputLabel value="#{bundle.CreateReparacionesLabel_descripcion}" for="descripcion" class="m-0"  />
                                     <h:inputText class="form-control" id="descripcion" value="#{reparacionesController.selected.descripcion}" title="#{bundle.CreateReparacionesTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_descripcion}"/>
                                     <h:outputLabel  value="#{bundle.CreateReparacionesLabel_costo}" for="costo" class="m-0"  />

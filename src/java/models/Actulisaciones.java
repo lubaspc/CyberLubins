@@ -32,7 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Actulisaciones.findAll", query = "SELECT a FROM Actulisaciones a")
     , @NamedQuery(name = "Actulisaciones.findByIdactulisaciones", query = "SELECT a FROM Actulisaciones a WHERE a.idactulisaciones = :idactulisaciones")
     , @NamedQuery(name = "Actulisaciones.findByDescripcion", query = "SELECT a FROM Actulisaciones a WHERE a.descripcion = :descripcion")
-    , @NamedQuery(name = "Actulisaciones.findByPresupuesto", query = "SELECT a FROM Actulisaciones a WHERE a.presupuesto = :presupuesto")})
+    , @NamedQuery(name = "Actulisaciones.findByPresupuesto", query = "SELECT a FROM Actulisaciones a WHERE a.presupuesto = :presupuesto")
+  //  , @NamedQuery(name = "Actulisaciones.findByTrabajos", query = "SELECT a Actulisaciones a WHERE a.idTrabajos = :idTrabajos")
+})
 public class Actulisaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;

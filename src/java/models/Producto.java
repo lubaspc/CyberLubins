@@ -124,7 +124,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Producto[ idProducto=" + idProducto + " ]";
+        return ""+idtipoEquipo.getTipo()+" "+idmarca.getNombre();
     }
     
 }

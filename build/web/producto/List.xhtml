@@ -12,8 +12,8 @@
         <ui:define name="body">
             
             <div class="row">
-                <h:form styleClass="jsfcrud_list_form col-12 col-md-6">
-                    <h:commandLink class="btn btn-outline-dark" action="#{productoController.prepareList}" value="#{bundle.CreateProductoShowAllLink}" immediate="true"/>
+                <h:form styleClass=" col-12 col-lg-6">
+                    <h:commandLink class="btn btn-outline-dark" action="#{productoController.prepareList}" value="Actulizar Tabla" immediate="true"/>
                     <h:panelGroup id="messagePanel" layout="block">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
@@ -22,7 +22,7 @@
                         <h:outputText value="#{productoController.pagination.pageFirstItem + 1}..#{productoController.pagination.pageLastItem + 1}/#{productoController.pagination.itemsCount}"/>&nbsp;
                         <h:commandLink action="#{productoController.previous}" value="#{bundle.Previous} #{productoController.pagination.pageSize}" rendered="#{productoController.pagination.hasPreviousPage}"/>&nbsp;
                         <h:commandLink action="#{productoController.next}" value="#{bundle.Next} #{productoController.pagination.pageSize}" rendered="#{productoController.pagination.hasNextPage}"/>&nbsp;
-                        <h:dataTable value="#{productoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:dataTable styleClass="table table-dark table-sm" value="#{productoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Descripcion"/>
@@ -33,13 +33,13 @@
                                 <f:facet name="header">
                                     <h:outputText value="Equipo"/>
                                 </f:facet>
-                                <h:outputText value="#{item.idtipoEquipo}"/>
+                                <h:outputText value="#{item.idtipoEquipo.tipo}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Marca"/>
                                 </f:facet>
-                                <h:outputText value="#{item.idmarca}"/>
+                                <h:outputText value="#{item.idmarca.nombre}"/>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">
@@ -52,8 +52,8 @@
                         </h:dataTable>
                     </h:panelGroup>
                 </h:form>
-                <div class="col-12 col-md-3">
-                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                <div class="col-12 col-lg-3">
+                     <div class="card shadow p-3 mb-5 bg-dark text-white border-success" style="height: max-content" >
                         <div class="card-header">
                             <h4 class="text-center">Editar producto</h4>
                         </div>
@@ -63,11 +63,11 @@
                                     
                                     <h:outputLabel value="#{bundle.EditProductoLabel_descripcion}" for="descripcion" class="m-0" />
                                     <h:inputText class="form-control" id="descripcion" value="#{productoController.selected.descripcion}" title="#{bundle.EditProductoTitle_descripcion}" />
-                                    <h:outputLabel value="#{bundle.EditProductoLabel_idtipoEquipo}" for="idtipoEquipo" class="m-0"/>
+                                    <h:outputLabel value="Tipo de equipo" for="idtipoEquipo" class="m-0"/>
                                     <h:selectOneMenu class="form-control" id="idtipoEquipo" value="#{productoController.selected.idtipoEquipo}" title="#{bundle.EditProductoTitle_idtipoEquipo}" required="true" requiredMessage="#{bundle.EditProductoRequiredMessage_idtipoEquipo}">
                                         <f:selectItems value="#{tipoEquipoController.itemsAvailableSelectOne}"/>
                                     </h:selectOneMenu>
-                                    <h:outputLabel value="#{bundle.EditProductoLabel_idmarca}" for="idmarca" class="m-0" />
+                                    <h:outputLabel value="Marca" for="idmarca" class="m-0" />
                                     <h:selectOneMenu class="form-control" id="idmarca" value="#{productoController.selected.idmarca}" title="#{bundle.EditProductoTitle_idmarca}" required="true" requiredMessage="#{bundle.EditProductoRequiredMessage_idmarca}">
                                         <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"/>
                                     </h:selectOneMenu>
@@ -78,23 +78,22 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-md-3">
-                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                <div class="col-12 col-lg-3">
+                   <div class="card shadow p-3 mb-5 bg-secondary border-success text-white" style="height: max-content" >
                         <div class="card-header">
                             <h4 class="text-center">Crear producto</h4>
                         </div>
                         <div class="card-body">
                             <h:form>
                                 <h:panelGrid class="form-group">
-                                    <h:outputLabel value="#{bundle.CreateProductoLabel_idProducto}" for="idProducto" class="m-0"/>
-                                    <h:inputText class="form-control" id="idProducto" value="#{productoController.selected.idProducto}" title="#{bundle.CreateProductoTitle_idProducto}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idProducto}"/>
+                                    <h:inputHidden  class="form-control d-none"  id="idProducto" value="#{productoController.selected.idProducto}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idProducto}"/>
                                     <h:outputLabel value="#{bundle.CreateProductoLabel_descripcion}" for="descripcion" class="my-0" />
                                     <h:inputText class="form-control" id="descripcion" value="#{productoController.selected.descripcion}" title="#{bundle.CreateProductoTitle_descripcion}" />
-                                    <h:outputLabel value="#{bundle.CreateProductoLabel_idtipoEquipo}" for="idtipoEquipo" class="my-0"/>
+                                    <h:outputLabel value="Tipo de equipo" for="idtipoEquipo" class="my-0"/>
                                     <h:selectOneMenu class="form-control" id="idtipoEquipo" value="#{productoController.selected.idtipoEquipo}" title="#{bundle.CreateProductoTitle_idtipoEquipo}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idtipoEquipo}">
                                         <f:selectItems value="#{tipoEquipoController.itemsAvailableSelectOne}"/>
                                     </h:selectOneMenu>
-                                    <h:outputLabel value="#{bundle.CreateProductoLabel_idmarca}" for="idmarca" class="my-0" />
+                                    <h:outputLabel value="Marca" for="idmarca" class="my-0" />
                                     <h:selectOneMenu class="form-control" id="idmarca" value="#{productoController.selected.idmarca}" title="#{bundle.CreateProductoTitle_idmarca}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idmarca}">
                                         <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"/>
                                     </h:selectOneMenu>

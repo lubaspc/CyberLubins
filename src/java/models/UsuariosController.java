@@ -4,6 +4,7 @@ import models.util.JsfUtil;
 import models.util.PaginationHelper;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -85,6 +86,22 @@ public class UsuariosController implements Serializable {
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
+        }
+    }
+    
+    public String login() {
+      
+        try {
+            List<Usuarios> lista =  ejbFacade.validat(current);
+          
+            if(lista.size()>0){
+                return "Aceptado";
+            }
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuariosCreated"));
+            return "Rechasado";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return "Rechasado";
         }
     }
 

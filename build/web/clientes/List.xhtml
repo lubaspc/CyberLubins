@@ -11,7 +11,7 @@
         </ui:define>
         <ui:define name="body">
             <div class="row">
-                <h:form styleClass="jsfcrud_list_form col-12 col-md-6">
+                <h:form styleClass=" col-12 col-lg-6">
                     <h:commandLink class="btn btn-outline-dark" action="#{clientesController.prepareList}" value="#{bundle.CreateClientesShowAllLink}" immediate="true"/>
                     <h:panelGroup id="messagePanel" layout="block">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -21,7 +21,7 @@
                         <h:outputText value="#{clientesController.pagination.pageFirstItem + 1}..#{clientesController.pagination.pageLastItem + 1}/#{clientesController.pagination.itemsCount}"/>&nbsp;
                         <h:commandLink action="#{clientesController.previous}" value="#{bundle.Previous} #{clientesController.pagination.pageSize}" rendered="#{clientesController.pagination.hasPreviousPage}"/>&nbsp;
                         <h:commandLink action="#{clientesController.next}" value="#{bundle.Next} #{clientesController.pagination.pageSize}" rendered="#{clientesController.pagination.hasNextPage}"/>&nbsp;
-                        <h:dataTable value="#{clientesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:dataTable styleClass=" table table-dark table-sm" value="#{clientesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                           
                             <h:column>
                                 <f:facet name="header">
@@ -45,23 +45,22 @@
                                 <f:facet name="header">
                                     <h:outputText value="Acciones"/>
                                 </f:facet>
-                                <h:commandLink class="btn btn-warning" action="#{clientesController.prepareEdit}" value="#{bundle.ListClientesEditLink}"/>
+                                <h:commandLink class="btn btn-outline-dark" action="#{clientesController.prepareEdit}" value="#{bundle.ListClientesEditLink}"/>
                                 <h:outputText value=" "/>
-                                <h:commandLink class="btn btn-danger" action="#{clientesController.destroy}" value="#{bundle.ListClientesDestroyLink}"/>
+                                <h:commandLink class="btn btn-outline-danger" action="#{clientesController.destroy}" value="#{bundle.ListClientesDestroyLink}"/>
                             </h:column>
                         </h:dataTable>
                     </h:panelGroup>
                 </h:form>
-                <div class="col-12 col-md-3">
-                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                <div class="col-12 col-lg-3">
+                     <div class="card text-white bg-dark border-success shadow p-3 mb-5" style="height: max-content" >
                         <div class="card-header">
                             <h4 class="text-center">Editar Cliente</h4>
                         </div>
                         <div class="card-body">
                             <h:form>
                                 <h:panelGrid class="form-group">
-                                    <h:outputLabel value="#{bundle.EditClientesLabel_idClientes}" for="idClientes" />
-                                    <h:inputText class="form-control" id="idClientes" value="#{clientesController.selected.idClientes}" title="#{bundle.EditClientesTitle_idClientes}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idClientes}"/>
+                                    <h:inputHidden class="form-control" id="idClientes" required="false" requiredMessage="#{bundle.EditClientesRequiredMessage_idClientes}"/>
                                     <h:outputLabel value="#{bundle.EditClientesLabel_nombre}" for="nombre" />
                                     <h:inputText class="form-control" id="nombre" value="#{clientesController.selected.nombre}" title="#{bundle.EditClientesTitle_nombre}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_nombre}"/>
                                     <h:outputLabel value="#{bundle.EditClientesLabel_direccion}" for="direccion" />
@@ -69,22 +68,21 @@
                                     <h:outputLabel value="#{bundle.EditClientesLabel_telefono}" for="telefono" />
                                     <h:inputText class="form-control" id="telefono" value="#{clientesController.selected.telefono}" title="#{bundle.EditClientesTitle_telefono}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_telefono}"/>
                                 </h:panelGrid>
-                                <h:commandLink class="btn btn-info form-control" action="#{clientesController.update}" value="#{bundle.EditClientesSaveLink}"/>
+                                <h:commandLink class="btn btn-success form-control" action="#{clientesController.update}" value="Modificar"/>
                             </h:form>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-12 col-md-3">
-                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                <div class="col-12 col-lg-3 ">
+                   <div class="card shadow p-3 mb-5 text-white bg-secondary border-success" style="height: max-content" >
                         <div class="card-header">
                             <h4 class="text-center">Crear Cliente</h4>
                         </div>
                         <div class="card-body">
                             <h:form>
                                 <h:panelGrid class="form-group">
-                                    <h:outputLabel value="#{bundle.CreateClientesLabel_idClientes}" for="idClientes" />
-                                    <h:inputText class="form-control" id="idClientes" value="#{clientesController.selected.idClientes}" title="#{bundle.CreateClientesTitle_idClientes}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_idClientes}"/>
+                                    <h:inputHidden class="form-control" id="idClientes" value="0" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_idClientes}"/>
                                     <h:outputLabel value="#{bundle.CreateClientesLabel_nombre}" for="nombre" />
                                     <h:inputText class="form-control" id="nombre" value="#{clientesController.selected.nombre}" title="#{bundle.CreateClientesTitle_nombre}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_nombre}"/>
                                     <h:outputLabel value="#{bundle.CreateClientesLabel_direccion}" for="direccion" />
@@ -92,7 +90,7 @@
                                     <h:outputLabel value="#{bundle.CreateClientesLabel_telefono}" for="telefono" />
                                     <h:inputText class="form-control" id="telefono" value="#{clientesController.selected.telefono}" title="#{bundle.CreateClientesTitle_telefono}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_telefono}"/>
                                 </h:panelGrid>
-                                <h:commandLink class="btn btn-success form-control" action="#{clientesController.create}" value="#{bundle.CreateClientesSaveLink}" />
+                                <h:commandLink class="btn btn-info form-control" action="#{clientesController.create}" value="#{bundle.CreateClientesSaveLink}" />
                             </h:form>
                         </div>
                     </div>

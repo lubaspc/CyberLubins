@@ -70,6 +70,14 @@ public class TrabajosController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
+    
+    public String prepareViewA() {
+        current = (Trabajos) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        ActulisacionesController Actulisaciones = new ActulisacionesController();
+        return Actulisaciones.prepareList();
+        
+    }
 
     public String prepareCreate() {
         current = new Trabajos();

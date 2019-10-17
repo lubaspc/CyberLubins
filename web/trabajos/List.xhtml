@@ -7,10 +7,14 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListTrabajosTitle}"></h:outputText>
+            <h:outputText value="Trabajos"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form styleClass="">
+                <div class="row">
+                <h:commandLink styleClass="btn btn-secondary col-2 offset-2" action="#{trabajosController.prepareCreate}" value="Crear Trabajo"/>
+                 <h:commandLink styleClass="btn btn-dark col-2 offset-3" action="#{trabajosController.prepareList}" value="Actulizar tabla" immediate="true"/>
+                </div>
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -19,12 +23,36 @@
                     <h:outputText value="#{trabajosController.pagination.pageFirstItem + 1}..#{trabajosController.pagination.pageLastItem + 1}/#{trabajosController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{trabajosController.previous}" value="#{bundle.Previous} #{trabajosController.pagination.pageSize}" rendered="#{trabajosController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{trabajosController.next}" value="#{bundle.Next} #{trabajosController.pagination.pageSize}" rendered="#{trabajosController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{trabajosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:dataTable styleClass="table table-dark table-sm text-center table-responsive" value="#{trabajosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTrabajosTitle_idTrabajos}"/>
                             </f:facet>
                             <h:outputText value="#{item.idTrabajos}"/>
+                        </h:column>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_estatus}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estatus}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_idProducto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProducto.idtipoEquipo.tipo}  #{item.idProducto.idmarca.nombre}"/>
+                        </h:column>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_idClientes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idClientes.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrabajosTitle_idusuarios}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idusuarios.tipoUsr}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -42,12 +70,7 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajosTitle_estatus}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.estatus}"/>
-                        </h:column>
+                       
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTrabajosTitle_fechaEntrega}"/>
@@ -62,41 +85,26 @@
                             </f:facet>
                             <h:outputText value="#{item.total}"/>
                         </h:column>
-                        <h:column>
+                                               <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajosTitle_idClientes}"/>
+                                <h:outputText value="Actulicaciones"/>
                             </f:facet>
-                            <h:outputText value="#{item.idClientes}"/>
+                            <h:commandLink action="#{trabajosController.prepareViewA}" value="Ver registros"/>
                         </h:column>
+                        
+                        
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajosTitle_idusuarios}"/>
+                                <h:outputText value="Acciones"/>
                             </f:facet>
-                            <h:outputText value="#{item.idusuarios}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTrabajosTitle_idProducto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProducto}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{trabajosController.prepareView}" value="#{bundle.ListTrabajosViewLink}"/>
+                            <h:commandLink action="#{trabajosController.prepareView}" styleClass="d-none" value="#{bundle.ListTrabajosViewLink}"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{trabajosController.prepareEdit}" value="#{bundle.ListTrabajosEditLink}"/>
+                            <h:commandLink action="#{trabajosController.prepareEdit}" styleClass="btn btn-outline-secondary" value="#{bundle.ListTrabajosEditLink}"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{trabajosController.destroy}" value="#{bundle.ListTrabajosDestroyLink}"/>
+                            <h:commandLink action="#{trabajosController.destroy}" styleClass="btn btn-outline-danger" value="#{bundle.ListTrabajosDestroyLink}"/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{trabajosController.prepareCreate}" value="#{bundle.ListTrabajosCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListTrabajosIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>

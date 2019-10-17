@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")
+    , @NamedQuery(name = "Usuarios.login", query = "SELECT u FROM Usuarios u WHERE u.correo = :email AND u.password = :pass")
     , @NamedQuery(name = "Usuarios.findByIdusuarios", query = "SELECT u FROM Usuarios u WHERE u.idusuarios = :idusuarios")
     , @NamedQuery(name = "Usuarios.findByTipoUsr", query = "SELECT u FROM Usuarios u WHERE u.tipoUsr = :tipoUsr")
     , @NamedQuery(name = "Usuarios.findByNombre", query = "SELECT u FROM Usuarios u WHERE u.nombre = :nombre")
@@ -150,7 +151,7 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Usuarios[ idusuarios=" + idusuarios + " ]";
+        return ""+tipoUsr ;
     }
     
 }

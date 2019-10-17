@@ -7,53 +7,54 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.CreateTrabajosTitle}"></h:outputText>
+            <h:outputText value="Crear Nuevo trabajo "></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_idTrabajos}" for="idTrabajos" />
-                    <h:inputText id="idTrabajos" value="#{trabajosController.selected.idTrabajos}" title="#{bundle.CreateTrabajosTitle_idTrabajos}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idTrabajos}"/>
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_fechaRecepcion}" for="fechaRecepcion" />
-                    <h:inputText id="fechaRecepcion" value="#{trabajosController.selected.fechaRecepcion}" title="#{bundle.CreateTrabajosTitle_fechaRecepcion}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_fechaRecepcion}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_fechaEstimada}" for="fechaEstimada" />
-                    <h:inputText id="fechaEstimada" value="#{trabajosController.selected.fechaEstimada}" title="#{bundle.CreateTrabajosTitle_fechaEstimada}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_fechaEstimada}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_estatus}" for="estatus" />
-                    <h:inputText id="estatus" value="#{trabajosController.selected.estatus}" title="#{bundle.CreateTrabajosTitle_estatus}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_estatus}"/>
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_fechaEntrega}" for="fechaEntrega" />
-                    <h:inputText id="fechaEntrega" value="#{trabajosController.selected.fechaEntrega}" title="#{bundle.CreateTrabajosTitle_fechaEntrega}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_total}" for="total" />
-                    <h:inputText id="total" value="#{trabajosController.selected.total}" title="#{bundle.CreateTrabajosTitle_total}" />
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_idClientes}" for="idClientes" />
-                    <h:selectOneMenu id="idClientes" value="#{trabajosController.selected.idClientes}" title="#{bundle.CreateTrabajosTitle_idClientes}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idClientes}">
-                        <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_idusuarios}" for="idusuarios" />
-                    <h:selectOneMenu id="idusuarios" value="#{trabajosController.selected.idusuarios}" title="#{bundle.CreateTrabajosTitle_idusuarios}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idusuarios}">
-                        <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateTrabajosLabel_idProducto}" for="idProducto" />
-                    <h:selectOneMenu id="idProducto" value="#{trabajosController.selected.idProducto}" title="#{bundle.CreateTrabajosTitle_idProducto}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idProducto}">
-                        <f:selectItems value="#{productoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{trabajosController.create}" value="#{bundle.CreateTrabajosSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{trabajosController.prepareList}" value="#{bundle.CreateTrabajosShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateTrabajosIndexLink}"/>
+                <div class="row">
+                    <h:commandLink styleClass="btn btn-info col-1" action="#{trabajosController.prepareList}" value="Regresar" immediate="true"/>
+                </div>
+                <div class="card mt-3 col-5 shadow bg-dark text-white">
+                    <div class="card-body">
+                        <h:commandLink styleClass="btn btn-success offset-8" action="#{trabajosController.create}" value="Guardar" />
+                        <h:panelGrid columns="2" styleClass="form-group">
+                            <h:outputLabel class="d-none" value="#{bundle.CreateTrabajosLabel_idTrabajos}" for="idTrabajos" />
+                            <h:inputHidden id="idTrabajos" value="#{trabajosController.selected.idTrabajos}" required="false" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idTrabajos}"/>
+                            <h:outputLabel value="#{bundle.CreateTrabajosLabel_fechaRecepcion}" for="fechaRecepcion" />
+                            <h:inputText styleClass="form-control" id="fechaRecepcion" value="#{trabajosController.selected.fechaRecepcion}" title="#{bundle.CreateTrabajosTitle_fechaRecepcion}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_fechaRecepcion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:inputText>
+                            <h:outputLabel value="#{bundle.CreateTrabajosLabel_fechaEstimada}" for="fechaEstimada" />
+                            <h:inputText styleClass="form-control" id="fechaEstimada" value="#{trabajosController.selected.fechaEstimada}" title="#{bundle.CreateTrabajosTitle_fechaEstimada}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_fechaEstimada}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:inputText>
+                            <h:outputLabel value="#{bundle.CreateTrabajosLabel_estatus}" for="estatus" />
+                            <h:inputText styleClass="form-control" id="estatus" value="#{trabajosController.selected.estatus}" title="#{bundle.CreateTrabajosTitle_estatus}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_estatus}"/>
+                            <h:outputLabel value="#{bundle.CreateTrabajosLabel_fechaEntrega}" for="fechaEntrega" />
+                            <h:inputText styleClass="form-control" id="fechaEntrega" value="#{trabajosController.selected.fechaEntrega}" title="#{bundle.CreateTrabajosTitle_fechaEntrega}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:inputText>
+                            <h:outputLabel value="#{bundle.CreateTrabajosLabel_total}" for="total" />
+                            <h:inputText styleClass="form-control" id="total" value="#{trabajosController.selected.total}" title="#{bundle.CreateTrabajosTitle_total}" />
+                            <h:outputLabel value="CLiente" for="idClientes" />
+                            <h:selectOneMenu styleClass="form-control" id="idClientes" value="#{trabajosController.selected.idClientes}" title="#{bundle.CreateTrabajosTitle_idClientes}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idClientes}">
+                                <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Receptor" for="idusuarios" />
+                            <h:selectOneMenu styleClass="form-control" id="idusuarios" value="#{trabajosController.selected.idusuarios}" title="#{bundle.CreateTrabajosTitle_idusuarios}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idusuarios}">
+                                <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Producto" for="idProducto" />
+                            <h:selectOneMenu styleClass="form-control" id="idProducto" value="#{trabajosController.selected.idProducto}" title="#{bundle.CreateTrabajosTitle_idProducto}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idProducto}">
+                                <f:selectItems value="#{productoController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                       
+                    </div>
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

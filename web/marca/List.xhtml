@@ -12,7 +12,7 @@
         
         <ui:define name="body">
             <div class="row">
-                <h:form styleClass="jsfcrud_list_form col-12 col-md-5">
+                <h:form styleClass=" col-12 col-lg-5">
                     <h:commandLink class="btn btn-outline-dark" action="#{marcaController.prepareList}" value="#{bundle.CreateMarcaShowAllLink}" immediate="true"/>
                     <h:panelGroup id="messagePanel" layout="block">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -22,7 +22,7 @@
                         <h:outputText value="#{marcaController.pagination.pageFirstItem + 1}..#{marcaController.pagination.pageLastItem + 1}/#{marcaController.pagination.itemsCount}"/>&nbsp;
                         <h:commandLink action="#{marcaController.previous}" value="#{bundle.Previous} #{marcaController.pagination.pageSize}" rendered="#{marcaController.pagination.hasPreviousPage}"/>&nbsp;
                         <h:commandLink action="#{marcaController.next}" value="#{bundle.Next} #{marcaController.pagination.pageSize}" rendered="#{marcaController.pagination.hasNextPage}"/>&nbsp;
-                        <h:dataTable value="#{marcaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:dataTable styleClass="table table-dark table-sm" value="#{marcaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                             
                             <h:column>
                                 <f:facet name="header">
@@ -42,8 +42,8 @@
                         </h:dataTable>
                     </h:panelGroup>
                 </h:form>
-                 <div class="col-12 col-md-3">
-                     <div class="card shadow p-3 mb-5" style="height: max-content" >
+                 <div class="col-12 col-lg-3">
+                     <div class="card shadow p-3 mb-5 bg-dark text-white border-success" style="height: max-content" >
                         <div class="card-header">
                             <h4 class="text-center">Editar Marca</h4>
                         </div>
@@ -59,14 +59,14 @@
                     </div>
 
                 </div>
-                <div class="col-12 col-md-3">
-                   <div class="card shadow p-3 mb-5" style="height: max-content" >
+                <div class="col-12 col-lg-3">
+                   <div class="card shadow p-3 mb-5 bg-secondary text-white border-success" style="height: max-content" >
                         <div class="card-header">
                             <h4 class="text-center">Crear Marca</h4>
                         </div>
                         <div class="card-body">
                             <h:form>
-                                <h:panelGrid class="form-group" >
+                                <h:panelGrid class="form-group " >
                                     <h:outputLabel value="#{bundle.CreateMarcaLabel_nombre}" for="nombre" class="mb-0" />
                                     <h:inputText id="nombre" class="form-control" value="#{marcaController.selected.nombre}" title="#{bundle.CreateMarcaTitle_nombre}" />
                                 </h:panelGrid>

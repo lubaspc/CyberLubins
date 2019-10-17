@@ -10,7 +10,8 @@
             <h:outputText value="#{bundle.ListActulisacionesTitle}"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="jsfcrud_list_form">
+            <h:form styleClass="">
+                <h:commandLink class="btn btn-primary" action="#{actulisacionesController.prepareCreate}" value="#{bundle.ListActulisacionesCreateLink}"/>
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -19,13 +20,7 @@
                     <h:outputText value="#{actulisacionesController.pagination.pageFirstItem + 1}..#{actulisacionesController.pagination.pageLastItem + 1}/#{actulisacionesController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{actulisacionesController.previous}" value="#{bundle.Previous} #{actulisacionesController.pagination.pageSize}" rendered="#{actulisacionesController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{actulisacionesController.next}" value="#{bundle.Next} #{actulisacionesController.pagination.pageSize}" rendered="#{actulisacionesController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{actulisacionesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListActulisacionesTitle_idactulisaciones}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idactulisaciones}"/>
-                        </h:column>
+                    <h:dataTable styleClass=" table table-dark" value="#{actulisacionesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListActulisacionesTitle_descripcion}"/>
@@ -48,7 +43,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListActulisacionesTitle_idreparaciones}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idreparaciones}"/>
+                            <h:outputText value="#{item.idreparaciones.descripcion}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -62,11 +57,6 @@
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
-                <br />
-                <h:commandLink action="#{actulisacionesController.prepareCreate}" value="#{bundle.ListActulisacionesCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListActulisacionesIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>

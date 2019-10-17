@@ -136,7 +136,7 @@ public class Clientes implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Clientes[ idClientes=" + idClientes + " ]";
+        return ""+nombre;
     }
     
 }
