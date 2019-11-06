@@ -21,57 +21,34 @@
             crossorigin="anonymous"></script>
         
     </h:head>
-    <h:body>
-         <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-            <h:link class="navbar-brand" outcome="/index" value="Cyber Lubin's" />
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
-                      <h:link outcome="/actulisaciones/List" class="nav-link" value="Actulisaciones"/>
-                  </li><li class="nav-item">
-                       <h:link outcome="/trabajos/List" class="nav-link" value="Trabajos"/>
-                  </li><li class="nav-item">
-                     <h:link outcome="/clientes/List"  class="nav-link" value="Clientes"/>
-                  </li><li class="nav-item">
-                      <h:link outcome="/usuarios/List" class="nav-link" value="Usuarios"/>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Mas opciones 
-                    </a>
-                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                      <h:link outcome="/producto/List" class="nav-link" value="Producto"/>
-                     <h:link outcome="/tipoEquipo/List" class="nav-link" value="TipoEquipo"/>
-                      <h:link outcome="/marca/List" class="nav-link" value="Marca"/>
-                      <div class="dropdown-divider"></div>
-                      <h:link outcome="/reparaciones/List" class="nav-link" value="Reparaciones"/>
-                    </div>
-                  </li>
-              </ul>
-            </div>
-          </nav>
-        <div class="container m-5 shadow">
-            <h:form>
-                 <h:panelGrid columns="2" styleClass="form-group">
-                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_correo}" for="correo" />
+    <h:body styleClass="w-100" style="height: 100vh">
+        
+        <div class="container-fluid h-100 w-100 bg-dark">
+            <div class="row justify-content-center h-100 align-content-center">
+                <div class="col-5 col-md-3">
+                    <div class="card shadow bg-secondary">
+                        <h:form styleClass="px-5">
+                 <h:panelGrid columns="1" styleClass="form-group">
+                    <h:outputLabel class="text-white h4" value="#{bundle.CreateUsuariosLabel_correo}" for="correo" />
                     <h:inputText id="correo" value="#{usuariosController.selected.correo}" 
                                  title="#{bundle.CreateUsuariosTitle_correo}" 
                                  required="true" 
+                                 class="form-control"
                                  requiredMessage="#{bundle.CreateUsuariosRequiredMessage_correo}"/>
                     
-                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_password}" for="password" />
+                    <h:outputLabel class="text-white h4" value="#{bundle.CreateUsuariosLabel_password}" for="password" />
                     <h:inputText id="password" value="#{usuariosController.selected.password}" 
                                  title="#{bundle.CreateUsuariosTitle_password}" 
                                  required="true" 
+                                 class="form-control"
                                  requiredMessage="#{bundle.CreateUsuariosRequiredMessage_password}"/>
                     
-                   <h:commandLink action="#{usuariosController.login}" value="#{bundle.CreateUsuariosSaveLink}" />
+                    <h:commandLink action="#{usuariosController.login}" styleClass="btn btn-success form-control " value="#{bundle.CreateUsuariosSaveLink}" />
                  </h:panelGrid>
             </h:form>
+                    </div>
+                </div>
+            </div>
         </div>
         
         

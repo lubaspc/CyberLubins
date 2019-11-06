@@ -14,31 +14,29 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
+                <div class="row">
+                    <h:commandLink styleClass="btn btn-success" action="#{actulisacionesController.update}" value="#{bundle.EditActulisacionesSaveLink}"/>
+                </div>
+                <div class="card mt-3 col-5 shadow bg-dark text-white">
+                    <div class="card-body">
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditActulisacionesLabel_idactulisaciones}" for="idactulisaciones" />
-                    <h:inputText id="idactulisaciones" value="#{actulisacionesController.selected.idactulisaciones}" title="#{bundle.EditActulisacionesTitle_idactulisaciones}" required="true" requiredMessage="#{bundle.EditActulisacionesRequiredMessage_idactulisaciones}"/>
+                    <h:outputLabel value="" for="idactulisaciones" />
+                    <h:inputHidden id="idactulisaciones" value="#{actulisacionesController.selected.idactulisaciones}" required="false" requiredMessage="#{bundle.EditActulisacionesRequiredMessage_idactulisaciones}"/>
                     <h:outputLabel value="#{bundle.EditActulisacionesLabel_descripcion}" for="descripcion" />
-                    <h:inputText id="descripcion" value="#{actulisacionesController.selected.descripcion}" title="#{bundle.EditActulisacionesTitle_descripcion}" />
+                    <h:inputText styleClass="form-control" id="descripcion" value="#{actulisacionesController.selected.descripcion}" title="#{bundle.EditActulisacionesTitle_descripcion}" />
                     <h:outputLabel value="#{bundle.EditActulisacionesLabel_presupuesto}" for="presupuesto" />
-                    <h:inputText id="presupuesto" value="#{actulisacionesController.selected.presupuesto}" title="#{bundle.EditActulisacionesTitle_presupuesto}" required="true" requiredMessage="#{bundle.EditActulisacionesRequiredMessage_presupuesto}"/>
+                    <h:inputText styleClass="form-control" id="presupuesto" value="#{actulisacionesController.selected.presupuesto}" title="#{bundle.EditActulisacionesTitle_presupuesto}" required="true" requiredMessage="#{bundle.EditActulisacionesRequiredMessage_presupuesto}"/>
                     <h:outputLabel value="#{bundle.EditActulisacionesLabel_idTrabajos}" for="idTrabajos" />
-                    <h:selectOneMenu id="idTrabajos" value="#{actulisacionesController.selected.idTrabajos}" title="#{bundle.EditActulisacionesTitle_idTrabajos}" required="true" requiredMessage="#{bundle.EditActulisacionesRequiredMessage_idTrabajos}">
+                    <h:selectOneMenu styleClass="form-control" id="idTrabajos" value="#{actulisacionesController.selected.idTrabajos}" title="#{bundle.EditActulisacionesTitle_idTrabajos}" required="true" requiredMessage="#{bundle.EditActulisacionesRequiredMessage_idTrabajos}">
                         <f:selectItems value="#{trabajosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditActulisacionesLabel_idreparaciones}" for="idreparaciones" />
-                    <h:selectOneMenu id="idreparaciones" value="#{actulisacionesController.selected.idreparaciones}" title="#{bundle.EditActulisacionesTitle_idreparaciones}" required="true" requiredMessage="#{bundle.EditActulisacionesRequiredMessage_idreparaciones}">
+                    <h:selectOneMenu styleClass="form-control" id="idreparaciones" value="#{actulisacionesController.selected.idreparaciones}" title="#{bundle.EditActulisacionesTitle_idreparaciones}" required="true" requiredMessage="#{bundle.EditActulisacionesRequiredMessage_idreparaciones}">
                         <f:selectItems value="#{reparacionesController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
-                <h:commandLink action="#{actulisacionesController.update}" value="#{bundle.EditActulisacionesSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditActulisacionesViewLink}"/>
-                <br />
-                <h:commandLink action="#{actulisacionesController.prepareList}" value="#{bundle.EditActulisacionesShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditActulisacionesIndexLink}" />
+                    </div>
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

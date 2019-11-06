@@ -4,6 +4,7 @@ import models.util.JsfUtil;
 import models.util.PaginationHelper;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -22,8 +23,10 @@ public class TrabajosController implements Serializable {
 
     private Trabajos current;
     private DataModel items = null;
+     private DataModel itemsA = null;
     @EJB
     private models.TrabajosFacade ejbFacade;
+    private models.ActulisacionesFacade ejcFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -71,11 +74,17 @@ public class TrabajosController implements Serializable {
         return "View";
     }
     
-    public String prepareViewA() {
-        current = (Trabajos) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        ActulisacionesController Actulisaciones = new ActulisacionesController();
-        return Actulisaciones.prepareList();
+    public String actulisaciones() {
+         try {
+            current = (Trabajos) getItems().getRowData();
+            List<Actulisaciones> lista =  ejcFacade.updates(current);
+            System.out.println(lista.size());
+            return "updates";
+        } catch (Exception e) {
+           
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return "Rechasado";
+        }
         
     }
 
@@ -89,7 +98,7 @@ public class TrabajosController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TrabajosCreated"));
-            return prepareCreate();
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -106,7 +115,7 @@ public class TrabajosController implements Serializable {
         try {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TrabajosUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

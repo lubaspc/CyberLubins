@@ -1,5 +1,6 @@
 package models;
 
+import java.io.IOException;
 import models.util.JsfUtil;
 import models.util.PaginationHelper;
 
@@ -16,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 
 @Named("usuariosController")
 @SessionScoped
@@ -27,6 +29,7 @@ public class UsuariosController implements Serializable {
     private models.UsuariosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private HttpServletRequest httpservlet;
 
     public UsuariosController() {
     }
@@ -90,11 +93,14 @@ public class UsuariosController implements Serializable {
     }
     
     public String login() {
-      
+       httpservlet = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         try {
             List<Usuarios> lista =  ejbFacade.validat(current);
-          
             if(lista.size()>0){
+                 Usuarios user = lista.get(0);
+                httpservlet.getSession().setAttribute("email", user.getCorreo());
+                httpservlet.getSession().setAttribute("nombre", user.getNombre());
+                httpservlet.getSession().setAttribute("usuario", user);
                 return "Aceptado";
             }
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuariosCreated"));
@@ -102,6 +108,16 @@ public class UsuariosController implements Serializable {
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return "Rechasado";
+        }
+    }
+    
+    public void verificaSesion() throws IOException{
+        httpservlet = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        Usuarios usu = (Usuarios) httpservlet.getSession().getAttribute("usuario");
+        if(usu == null){
+           FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            FacesContext.getCurrentInstance().getExternalContext().redirect(  //);
+                    FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
         }
     }
 

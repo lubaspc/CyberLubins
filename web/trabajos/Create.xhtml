@@ -14,17 +14,15 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <div class="row">
-                    <h:commandLink styleClass="btn btn-info col-1" action="#{trabajosController.prepareList}" value="Regresar" immediate="true"/>
-                </div>
-                <div class="card mt-3 col-5 shadow bg-dark text-white">
+                <div class="card mt-3 col-6 offset-3 shadow bg-dark text-white">
                     <div class="card-body">
-                        <h:commandLink styleClass="btn btn-success offset-8" action="#{trabajosController.create}" value="Guardar" />
+                        <h:commandLink styleClass="btn btn-success align-items-end col-12" action="#{trabajosController.create}" value="Guardar" />
+                         <h:outputLabel class="text-center col-12 h5 pt-2 font-weight-bold" value="Formato de fechas MM/dd/YYYY" />
                         <h:panelGrid columns="2" styleClass="form-group">
                             <h:outputLabel class="d-none" value="#{bundle.CreateTrabajosLabel_idTrabajos}" for="idTrabajos" />
                             <h:inputHidden id="idTrabajos" value="#{trabajosController.selected.idTrabajos}" required="false" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_idTrabajos}"/>
                             <h:outputLabel value="#{bundle.CreateTrabajosLabel_fechaRecepcion}" for="fechaRecepcion" />
-                            <h:inputText styleClass="form-control" id="fechaRecepcion" value="#{trabajosController.selected.fechaRecepcion}" title="#{bundle.CreateTrabajosTitle_fechaRecepcion}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_fechaRecepcion}">
+                                <h:inputText styleClass="form-control" id="fechaRecepcion" value="#{trabajosController.selected.fechaRecepcion}" title="#{bundle.CreateTrabajosTitle_fechaRecepcion}" required="true" requiredMessage="#{bundle.CreateTrabajosRequiredMessage_fechaRecepcion}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:inputText>
                             <h:outputLabel value="#{bundle.CreateTrabajosLabel_fechaEstimada}" for="fechaEstimada" />

@@ -86,7 +86,7 @@
                         <div class="card-body">
                             <h:form>
                                 <h:panelGrid class="form-group">
-                                    <h:inputHidden  class="form-control d-none"  id="idProducto" value="#{productoController.selected.idProducto}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idProducto}"/>
+                                    <h:inputHidden  class="form-control d-none"  id="idProducto" value="#{productoController.selected.idProducto}" required="false" requiredMessage="#{bundle.CreateProductoRequiredMessage_idProducto}"/>
                                     <h:outputLabel value="#{bundle.CreateProductoLabel_descripcion}" for="descripcion" class="my-0" />
                                     <h:inputText class="form-control" id="descripcion" value="#{productoController.selected.descripcion}" title="#{bundle.CreateProductoTitle_descripcion}" />
                                     <h:outputLabel value="Tipo de equipo" for="idtipoEquipo" class="my-0"/>

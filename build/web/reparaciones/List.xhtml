@@ -80,7 +80,7 @@
                         <div class="card-body">
                             <h:form>
                                 <h:panelGrid class="form-group">
-                                    <h:inputHidden class="form-control" id="idReparaciones" value="#{reparacionesController.selected.idReparaciones}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_idReparaciones}"/>
+                                    <h:inputHidden id="idReparaciones" value="#{reparacionesController.selected.idReparaciones}" required="false" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_idReparaciones}"/>
                                     <h:outputLabel value="#{bundle.CreateReparacionesLabel_descripcion}" for="descripcion" class="m-0"  />
                                     <h:inputText class="form-control" id="descripcion" value="#{reparacionesController.selected.descripcion}" title="#{bundle.CreateReparacionesTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_descripcion}"/>
                                     <h:outputLabel  value="#{bundle.CreateReparacionesLabel_costo}" for="costo" class="m-0"  />
@@ -95,7 +95,10 @@
                     </div>
                 </div>
             </div>
+            <script>$('#idReparaciones').val(1)</script>
         </ui:define>
+        
+            
     </ui:composition>
-
+    
 </html>

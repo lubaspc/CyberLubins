@@ -198,7 +198,7 @@ public class Trabajos implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Trabajos[ idTrabajos=" + idTrabajos + " ]";
+        return idTrabajos + " ";
     }
     
 }

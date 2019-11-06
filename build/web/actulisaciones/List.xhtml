@@ -11,7 +11,8 @@
         </ui:define>
         <ui:define name="body">
             <h:form styleClass="">
-                <h:commandLink class="btn btn-primary" action="#{actulisacionesController.prepareCreate}" value="#{bundle.ListActulisacionesCreateLink}"/>
+                <h:commandLink class="btn btn-secondary" action="#{actulisacionesController.prepareCreate}" value="#{bundle.ListActulisacionesCreateLink}"/>
+                 <h:commandLink styleClass="btn btn-dark col-2 offset-3" action="#{actulisacionesController.prepareList}" value="Actulizar tabla" immediate="true"/>
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -49,11 +50,9 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{actulisacionesController.prepareView}" value="#{bundle.ListActulisacionesViewLink}"/>
+                            <h:commandLink class="btn btn-outline-secondary" action="#{actulisacionesController.prepareEdit}" value="#{bundle.ListActulisacionesEditLink}"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{actulisacionesController.prepareEdit}" value="#{bundle.ListActulisacionesEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{actulisacionesController.destroy}" value="#{bundle.ListActulisacionesDestroyLink}"/>
+                            <h:commandLink class="btn btn-outline-danger" action="#{actulisacionesController.destroy}" value="#{bundle.ListActulisacionesDestroyLink}"/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>

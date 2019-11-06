@@ -20,4 +20,15 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/faces/trabajos/List.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>updates</from-outcome>
+            <to-view-id>/faces/trabajos/updates.xhtml</to-view-id>
+        </navigation-case>
+      <navigation-case>
+            <from-outcome>Rechasado</from-outcome>
+            <to-view-id>/faces/trabajos/updates.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

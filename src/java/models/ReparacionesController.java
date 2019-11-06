@@ -79,6 +79,7 @@ public class ReparacionesController implements Serializable {
 
     public String create() {
         try {
+            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ReparacionesCreated"));
             return "List";

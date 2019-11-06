@@ -5,9 +5,11 @@
  */
 package models;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +28,16 @@ public class ActulisacionesFacade extends AbstractFacade<Actulisaciones> {
 
     public ActulisacionesFacade() {
         super(Actulisaciones.class);
+    }
+    
+    public List<Actulisaciones> updates(Trabajos tr){
+        System.out.println(tr.getIdTrabajos());
+       Query update =em.createNamedQuery("Actulisaciones.findByTrabajos")
+                .setParameter("idTrabajos", tr.getIdTrabajos());
+                
+        System.out.println(update);
+        
+        return update.getResultList();
     }
     
 }
