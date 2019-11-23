@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templete.xhtml">
+
+            <ui:define name="content" >
+                <div class="content ">
+                    <div class="card m-5">
+                        <div class="card-header">
+                            <h2 class="text-center">Ingresa los datos de tu equipo</h2>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <div class="form-group">
+                                    <h:outputLabel value="Equipo que dejo" for="idtipoEquipo" />
+                                    <h:selectOneMenu id="idtipoEquipo" class="form-control" value="#{productoController.selected.idtipoEquipo}" title="#{bundle.CreateProductoTitle_idtipoEquipo}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idtipoEquipo}">
+                                        <f:selectItems value="#{tipoEquipoController.itemsAvailableSelectOne}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="Marca del equipo" for="idmarca" />
+                                    <h:selectOneMenu id="idmarca" class="form-control" value="#{productoController.selected.idmarca}" title="#{bundle.CreateProductoTitle_idmarca}" required="true" requiredMessage="#{bundle.CreateProductoRequiredMessage_idmarca}">
+                                        <f:selectItems value="#{marcaController.itemsAvailableSelectOne}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <label for="folio">Folio de reparacion</label>
+                                    <input type="text" class="form-control" id="folio" placeholder="Folio de registro"/>
+                                </div>
+                                <div class="form-group">
+                                    <h:commandLink action="#{consultaController.create}" value="Consultar" class="btn btn-primary" />
+                                </div>
+                            </h:form>
+                          
+                        </div>
+                      </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
