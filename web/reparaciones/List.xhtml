@@ -54,7 +54,7 @@
                 <div class="col-12 col-lg-3">
                      <div class="card shadow p-3 mb-5 text-white bg-dark border-success" style="height: max-content" >
                         <div class="card-header">
-                            <h4 class="text-center">Editar Reparacion</h4>
+                            <h5 class="text-center">Editar Reparacion</h5>
                         </div>
                         <div class="card-body">
                             <h:form>
@@ -66,7 +66,7 @@
                                     <h:outputLabel value="#{bundle.EditReparacionesLabel_duracion}" for="duracion" class="m-0"/>
                                     <h:inputText class="form-control" id="duracion" value="#{reparacionesController.selected.duracion}" title="#{bundle.EditReparacionesTitle_duracion}" required="true" requiredMessage="#{bundle.EditReparacionesRequiredMessage_duracion}"/>
                                 </h:panelGrid>
-                                <h:commandLink class="btn btn-info form-control" action="#{reparacionesController.update}" value="#{bundle.EditReparacionesSaveLink}"/>
+                                <h:commandLink class="btn btn-info form-control" action="#{reparacionesController.update}" value="Guardar"/>
                             </h:form>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                     <h:inputText class="form-control" id="duracion" value="#{reparacionesController.selected.duracion}" title="#{bundle.CreateReparacionesTitle_duracion}" required="true" requiredMessage="#{bundle.CreateReparacionesRequiredMessage_duracion}"/>
                                 </h:panelGrid>
 
-                                <h:commandLink class="btn btn-success form-control" action="#{reparacionesController.create}" value="Guardar" />
+                                <h:commandLink class="btn btn-success form-control" action="#{reparacionesController.create}" value="Crear" />
                             </h:form>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 package models;
 
+
 import models.util.JsfUtil;
 import models.util.PaginationHelper;
 
@@ -15,6 +16,13 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.apache.commons.io.IOUtils;
+import org.primefaces.model.UploadedFile;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 @Named("actulisacionesController")
 @SessionScoped
@@ -26,6 +34,15 @@ public class ActulisacionesController implements Serializable {
     private models.ActulisacionesFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private UploadedFile file;
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
 
     public ActulisacionesController() {
     }
@@ -76,16 +93,39 @@ public class ActulisacionesController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+    
+    public String storageFile(int Id){
+        String path = "/resources/"+Id+".jpeg";
+        File file2 = new File("C:/Users/lubas/Documents/NetBeansProjects/CyberLubins/web"+path);
+      try (OutputStream outputStream = new FileOutputStream(file2)) {
+                IOUtils.copy(file.getInputstream(), outputStream);
+                return path;
+            } catch (FileNotFoundException e) {
+                // handle exception here
+                JsfUtil.addErrorMessage(e, "No lo encontre xD");
+            } catch (IOException e) {
+                // handle exception here
+                JsfUtil.addErrorMessage(e,"Error x_x");
+
+            }
+        return "";
+    }
 
     public String create() {
-        try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ActulisacionesCreated"));
-            return "List";
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+           System.out.println(file.getContentType());
+        if(file.getContentType().equals("image/jpeg") || file.getContentType().equals("application/octet-stream")){
+            try {
+                current.setDescripcion(storageFile((pagination.getItemsCount())+1));
+                getFacade().create(current);
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ActulisacionesCreated"));
+                return "List";
+            } catch (Exception e) {
+                JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                return null;
+            }
         }
+        JsfUtil.addErrorMessage( ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        return prepareCreate();
     }
 
     public String prepareEdit() {
@@ -95,14 +135,19 @@ public class ActulisacionesController implements Serializable {
     }
 
     public String update() {
-        try {
-            getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ActulisacionesUpdated"));
-            return "List";
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
+        if(file.getContentType().equals("image/jpeg") || file.getContentType().equals("application/octet-stream")){
+            try {
+                current.setDescripcion(storageFile(current.getIdactulisaciones()));
+                getFacade().edit(current);
+                JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ActulisacionesUpdated"));
+                return "List";
+            } catch (Exception e) {
+                JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                return null;
+            }
         }
+          JsfUtil.addErrorMessage( ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+        return prepareEdit();
     }
 
     public String destroy() {

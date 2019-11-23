@@ -120,6 +120,16 @@ public class UsuariosController implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
         }
     }
+    
+    public void cerrarSesion(){
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            FacesContext.getCurrentInstance().getExternalContext().redirect(  //);
+                    FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
+        }catch(Exception e){
+            
+        }
+    }
 
     public String prepareEdit() {
         current = (Usuarios) getItems().getRowData();

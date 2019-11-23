@@ -3,34 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.CreateActulisacionesTitle}"></h:outputText>
+            <h:outputText value="Crear nueva actualizaciones"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <div class="row">
-                <h:commandLink styleClass="btn btn-info col-1"  action="#{actulisacionesController.create}" value="#{bundle.CreateActulisacionesSaveLink}" />
+            <h:form styleClass="row justify-content-center text-center" enctype="multipart/form-data">
+                <div class="col-12 d-flex justify-content-center">
+                <h:commandLink styleClass="btn btn-dark col-1 d-block"  action="#{actulisacionesController.create}" value="Crear" />
                 </div>
                 <div class="card mt-3 col-5 shadow bg-dark text-white ">
                     <div class="card-body">
                 <h:panelGrid columns="2">
                     <h:outputLabel  for="idactulisaciones" />
                     <h:inputHidden class="form-control" id="idactulisaciones" value="#{actulisacionesController.selected.idactulisaciones}" required="false" requiredMessage="#{bundle.CreateActulisacionesRequiredMessage_idactulisaciones}"/>
-                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_descripcion}" for="descripcion" />
-                    <h:inputText class="form-control" id="descripcion" value="#{actulisacionesController.selected.descripcion}" title="#{bundle.CreateActulisacionesTitle_descripcion}" />
-                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_presupuesto}" for="presupuesto" />
+                    <h:outputLabel value="Descripcion" for="descripcion" />
+                    <p:fileUpload mode="simple" value="#{actulisacionesController.file}" required="true" requiredMessage="Es nesesario el archivo"></p:fileUpload>
+                    <h:outputLabel value="Presupuesto" for="presupuesto" />
                     <h:inputText class="form-control" id="presupuesto" value="#{actulisacionesController.selected.presupuesto}" title="#{bundle.CreateActulisacionesTitle_presupuesto}" required="true" requiredMessage="#{bundle.CreateActulisacionesRequiredMessage_presupuesto}"/>
-                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_idTrabajos}" for="idTrabajos" />
+                    <h:outputLabel value="Trabajo" for="idTrabajos" />
                     <h:selectOneMenu class="form-control" id="idTrabajos" value="#{actulisacionesController.selected.idTrabajos}" title="#{bundle.CreateActulisacionesTitle_idTrabajos}" required="true" requiredMessage="#{bundle.CreateActulisacionesRequiredMessage_idTrabajos}">
                         <f:selectItems value="#{trabajosController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateActulisacionesLabel_idreparaciones}" for="idreparaciones" />
+                    <h:outputLabel value="Reparacion" for="idreparaciones" />
                     <h:selectOneMenu class="form-control" id="idreparaciones" value="#{actulisacionesController.selected.idreparaciones}" title="#{bundle.CreateActulisacionesTitle_idreparaciones}" required="true" requiredMessage="#{bundle.CreateActulisacionesRequiredMessage_idreparaciones}">
                         <f:selectItems value="#{reparacionesController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>

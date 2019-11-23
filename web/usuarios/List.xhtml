@@ -68,7 +68,7 @@
                             <h:form>
                                 <h:panelGrid class="form-group">
                                     <h:inputHidden class="form-control" id="idusuarios" value="#{usuariosController.selected.idusuarios}" required="false" requiredMessage="#{bundle.EditUsuariosRequiredMessage_idusuarios}"/>
-                                    <h:outputLabel value="#{bundle.EditUsuariosLabel_tipoUsr}" for="tipoUsr" />
+                                    <h:outputLabel value="Tipo de usuario" for="tipoUsr" />
                                     <h:inputText class="form-control" id="nombre" value="#{usuariosController.selected.nombre}" title="#{bundle.EditUsuariosTitle_nombre}" />
                                     <h:outputLabel value="#{bundle.EditUsuariosLabel_nombre}" for="nombre" />
                                     <h:inputText class="form-control" id="tipoUsr" value="#{usuariosController.selected.tipoUsr}" title="#{bundle.EditUsuariosTitle_tipoUsr}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_tipoUsr}"/>
@@ -92,7 +92,7 @@
                            <h:form>
                                 <h:panelGrid class="form-group">
                                     <h:inputHidden class="form-control" id="idusuarios" value="#{usuariosController.selected.idusuarios}" required="false" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_idusuarios}"/>
-                                    <h:outputLabel value="#{bundle.CreateUsuariosLabel_tipoUsr}" for="tipoUsr" />
+                                    <h:outputLabel value="Tipo de usuario" for="tipoUsr" />
                                     <h:inputText class="form-control" id="nombre" value="#{usuariosController.selected.nombre}" title="#{bundle.CreateUsuariosTitle_nombre}" />
                                     <h:outputLabel value="#{bundle.CreateUsuariosLabel_nombre}" for="nombre" />
                                     <h:inputText class="form-control" id="tipoUsr" value="#{usuariosController.selected.tipoUsr}" title="#{bundle.CreateUsuariosTitle_tipoUsr}" required="true" requiredMessage="#{bundle.CreateUsuariosRequiredMessage_tipoUsr}"/>

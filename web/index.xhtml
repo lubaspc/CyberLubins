@@ -37,13 +37,14 @@
                                  requiredMessage="#{bundle.CreateUsuariosRequiredMessage_correo}"/>
                     
                     <h:outputLabel class="text-white h4" value="#{bundle.CreateUsuariosLabel_password}" for="password" />
-                    <h:inputText id="password" value="#{usuariosController.selected.password}" 
+                    <h:inputSecret id="password" value="#{usuariosController.selected.password}" 
                                  title="#{bundle.CreateUsuariosTitle_password}" 
                                  required="true" 
+                                
                                  class="form-control"
                                  requiredMessage="#{bundle.CreateUsuariosRequiredMessage_password}"/>
                     
-                    <h:commandLink action="#{usuariosController.login}" styleClass="btn btn-success form-control " value="#{bundle.CreateUsuariosSaveLink}" />
+                    <h:commandLink action="#{usuariosController.login}" styleClass="btn btn-success form-control " value="Iniciar session" />
                  </h:panelGrid>
             </h:form>
                     </div>
