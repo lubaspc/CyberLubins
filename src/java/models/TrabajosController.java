@@ -13,6 +13,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -23,12 +24,29 @@ public class TrabajosController implements Serializable {
 
     private Trabajos current;
     private DataModel items = null;
-     private DataModel itemsA = null;
     @EJB
     private models.TrabajosFacade ejbFacade;
-    private models.ActulisacionesFacade ejcFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private String message;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public TrabajosController() {
     }
@@ -74,24 +92,21 @@ public class TrabajosController implements Serializable {
         return "View";
     }
     
-    public String actulisaciones() {
-         try {
-            current = (Trabajos) getItems().getRowData();
-            List<Actulisaciones> lista =  ejcFacade.updates(current);
-            System.out.println(lista.size());
-            return "updates";
-        } catch (Exception e) {
-           
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return "Rechasado";
-        }
-        
-    }
-
     public String prepareCreate() {
         current = new Trabajos();
         selectedItemIndex = -1;
         return "Create";
+    }
+    
+    public void updateStatus(AjaxBehaviorEvent event){
+        current = (Trabajos) getItems().getRowData();
+        if( ejbFacade.Cambia_status(status, current.getIdTrabajos())){
+            this.message = "Cambiado";
+            items = null;
+            this.items = getPagination().createPageDataModel();
+        }else{
+            this.message = "No cambiado";
+        }
     }
 
     public String create() {

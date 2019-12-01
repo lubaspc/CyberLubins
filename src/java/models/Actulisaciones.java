@@ -131,7 +131,7 @@ public class Actulisaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Actulisaciones[ idactulisaciones=" + idactulisaciones + " ]";
+        return  "Presupuesto: $" +presupuesto+", Reparacion: "+idreparaciones;
     }
     
 }

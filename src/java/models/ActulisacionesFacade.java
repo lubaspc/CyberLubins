@@ -39,5 +39,13 @@ public class ActulisacionesFacade extends AbstractFacade<Actulisaciones> {
         
         return update.getResultList();
     }
+
+    public List<Actulisaciones> buscar(Trabajos idTrabajos) {
+        Query consulta = em.createNamedQuery("Actulisaciones.findByTrabajos",Actulisaciones.class)
+                .setParameter("idTrabajos", idTrabajos);
+        List<Actulisaciones> lista = consulta.getResultList();
+        
+        return lista;
+    }
     
 }

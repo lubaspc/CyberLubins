@@ -10,7 +10,30 @@
             <h:outputText value="Trabajos"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form styleClass="">
+            <h:form styleClass="" id="Form">
+                
+                <div class="row justify-content-between">
+                    <div class="d-block">
+                         <h:outputLabel value="Trabajo" />
+                        <h:selectOneMenu id="works" value="#{actulisacionesController.work}">
+                            <f:selectItem itemValue="0" itemLabel="--Seleccionar--"/>
+                            <f:selectItems value="#{actulisacionesController.works}" />
+                             <f:ajax
+                                event="change"
+                                render="updates"
+                                execute="works"
+                                listener="#{actulisacionesController.shearchUpdates}"
+                                />
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="d-block">
+                        <h:outputLabel value="Actulisaciones" />
+                        <h:selectOneMenu id="updates" value="">
+                            <f:selectItems value="#{actulisacionesController.updates}" />
+                       </h:selectOneMenu>
+                    </div>
+                 </div>
+                <br/>
                 <div class="row">
                 <h:commandLink styleClass="btn btn-secondary col-2 offset-2" action="#{trabajosController.prepareCreate}" value="Crear Trabajo"/>
                  <h:commandLink styleClass="btn btn-dark col-2 offset-3" action="#{trabajosController.prepareList}" value="Actulizar tabla" immediate="true"/>
@@ -23,7 +46,11 @@
                     <h:outputText value="#{trabajosController.pagination.pageFirstItem + 1}..#{trabajosController.pagination.pageLastItem + 1}/#{trabajosController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{trabajosController.previous}" value="#{bundle.Previous} #{trabajosController.pagination.pageSize}" rendered="#{trabajosController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{trabajosController.next}" value="#{bundle.Next} #{trabajosController.pagination.pageSize}" rendered="#{trabajosController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable styleClass="table table-dark table-sm text-center" value="#{trabajosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:dataTable id="Table" styleClass="table table-dark table-sm text-center" 
+                                 value="#{trabajosController.items}" var="item" 
+                                 border="0" cellpadding="2" cellspacing="0" 
+                                 rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" 
+                                 style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTrabajosTitle_idTrabajos}"/>
@@ -34,8 +61,18 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTrabajosTitle_estatus}"/>
                             </f:facet>
-                            <h:outputText value="#{item.estatus}"/>
-                        </h:column>
+                             <h:outputText value="#{item.estatus}" styleClass="h3"/>
+                             <br/>
+                            <h:inputText id="status" value="#{trabajosController.status}" />
+                          <br></br>
+                          <h:commandLink styleClass="btn btn-outline-info" value="Cambiar Status">
+                              <f:ajax 
+                                  execute="status" 
+                                  render="Form" 
+                                  listener="#{trabajosController.updateStatus}">
+                              </f:ajax>
+                          </h:commandLink>
+                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTrabajosTitle_idProducto}"/>
@@ -85,13 +122,6 @@
                             </f:facet>
                             <h:outputText value="#{item.total}"/>
                         </h:column>
-                      <!--  <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Actulicaciones"/>
-                            </f:facet>
-                            <h:commandLink action="#{trabajosController.actulisaciones()}" value="Ver registros"/>
-                        </h:column>-->
-                        
                         
                         <h:column>
                             <f:facet name="header">

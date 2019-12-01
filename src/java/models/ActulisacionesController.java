@@ -23,6 +23,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.event.AjaxBehaviorEvent;
 
 @Named("actulisacionesController")
 @SessionScoped
@@ -32,9 +35,56 @@ public class ActulisacionesController implements Serializable {
     private DataModel items = null;
     @EJB
     private models.ActulisacionesFacade ejbFacade;
+    @EJB
+    private TrabajosFacade worksfcd;
+    
+    private Actulisaciones update;
+    private Trabajos work;
+    
+    private List<Actulisaciones> updates;
+    
+    private List<Trabajos> works;
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private UploadedFile file;
+    
+    
+    
+    public Actulisaciones getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Actulisaciones update) {
+        this.update = update;
+    }
+
+    public Trabajos getWork() {
+        return work;
+    }
+
+    public void setWork(Trabajos work) {
+        this.work = work;
+    }
+
+    public List<Actulisaciones> getUpdates() {
+        return updates;
+    }
+
+    public void setUpdates(List<Actulisaciones> updates) {
+        this.updates = updates;
+    }
+
+    public List<Trabajos> getWorks() {
+         this.works = new ArrayList<Trabajos>();
+        List<Trabajos> lp = worksfcd.findAll(); 
+       
+        return lp;
+    }
+
+    public void setWorks(List<Trabajos> works) {
+        this.works = works;
+    }
+    
 
     public UploadedFile getFile() {
         return file;
@@ -43,6 +93,12 @@ public class ActulisacionesController implements Serializable {
     public void setFile(UploadedFile file) {
         this.file = file;
     }
+    
+    
+     public void shearchUpdates (AjaxBehaviorEvent event){
+        this.updates = ejbFacade.buscar(work);
+    }
+    
 
     public ActulisacionesController() {
     }
